@@ -66,51 +66,54 @@ public class Zadanie04_KingQueen {
             return true;
         }
 
-        int checkingRow = kingRow;
-        int checkingColumn = kingColumn;
+        int rowToCheck = kingRow;
+        int columnToCheck = kingColumn;
 
         //diagonally
         for (int i = 0; i < boardSize; i++) {
-            checkingRow++;
-            checkingColumn++;
+            rowToCheck++;
+            columnToCheck++;
 
-            if (checkingRow >= boardSize) {
-                checkingRow = boardSize - checkingColumn;
-                checkingColumn = 0;
-            } else if (checkingColumn >= boardSize) {
-                checkingColumn = boardSize - checkingRow;
-                checkingRow = 0;
+            if (rowToCheck >= boardSize) {
+                rowToCheck = boardSize - columnToCheck;
+                columnToCheck = 0;
+            } else if (columnToCheck >= boardSize) {
+                columnToCheck = boardSize - rowToCheck;
+                rowToCheck = 0;
             }
 
-            if (checkingRow == queenRow && checkingColumn == queenColumn) {
+            if ((rowToCheck == queenRow) && (columnToCheck == queenColumn)) {
                 return true;
             }
 
-            if (checkingRow == kingRow && checkingColumn == kingColumn) {
+            if ((rowToCheck == kingRow) && (columnToCheck == kingColumn)) {
                 for (int j = 0; j < boardSize; j++) {
-                    checkingRow--;
-                    checkingColumn++;
+                    rowToCheck--;
+                    columnToCheck++;
 
-                    if (checkingRow < 0) {
-                        checkingRow = checkingRow + checkingColumn;
-                        checkingColumn = 0;
-                    } else if (checkingColumn >= boardSize) {
-                        checkingColumn = boardSize - checkingRow;
-                        checkingRow = 0;
+                    if (rowToCheck < 0) {
+                        rowToCheck = rowToCheck + columnToCheck;
+                        columnToCheck = 0;
+                    } else if (columnToCheck >= boardSize) {
+                        columnToCheck = boardSize - rowToCheck;
+                        rowToCheck = 0;
                     }
 
-                    if (checkingRow == queenRow && checkingColumn == queenColumn) {
+                    if (rowToCheck == queenRow && columnToCheck == queenColumn) {
                         return true;
+                    }
+
+                    if ((rowToCheck == kingRow) && (columnToCheck == kingColumn)) {
+                        return false;
                     }
                 }
             }
-
         }
         return false;
     }
 
     public static int getFigureRow(String alphanumericPosition) {
-        return Math.abs(Integer.parseInt(alphanumericPosition.substring(1)) - boardSize);
+        return boardSize - Integer.parseInt(alphanumericPosition.substring(1));
     }
 
     public static int getFigureColumn(String alphanumericPosition) {
@@ -148,13 +151,14 @@ public class Zadanie04_KingQueen {
     }
 
     public static int inputNumber() {
-        Scanner scanner = new Scanner(System.in);
         int number;
         while (true) {
             try {
                 number = scanner.nextInt();
                 scanner.nextLine();
-                break;
+                if (number > 0) {
+                    break;
+                } else System.out.println("Wrong input");
             } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Wrong input");
                 scanner.nextLine();

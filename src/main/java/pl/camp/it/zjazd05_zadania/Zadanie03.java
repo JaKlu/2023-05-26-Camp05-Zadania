@@ -40,7 +40,9 @@ public class Zadanie03 {
             try {
                 number = scanner.nextInt();
                 scanner.nextLine();
-                break;
+                if (number > 0) {
+                    break;
+                } else System.out.println("Wrong input");
             } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Wrong input");
                 scanner.nextLine();
