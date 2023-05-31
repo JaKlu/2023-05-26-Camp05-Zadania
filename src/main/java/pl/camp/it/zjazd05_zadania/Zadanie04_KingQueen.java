@@ -117,7 +117,7 @@ public class Zadanie04_KingQueen {
     }
 
     public static int getFigureColumn(String alphanumericPosition) {
-        switch (alphanumericPosition.substring(0, 1)) {
+        switch (alphanumericPosition.substring(0, 1).toLowerCase()) {
             case "a":
                 return 0;
             case "b":
