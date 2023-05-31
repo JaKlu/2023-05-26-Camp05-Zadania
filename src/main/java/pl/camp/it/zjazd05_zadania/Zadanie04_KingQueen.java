@@ -3,6 +3,9 @@ package pl.camp.it.zjazd05_zadania;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * http://www.codeabbey.com/index/task_view/king-and-queen
+ */
 public class Zadanie04_KingQueen {
     private static final int boardSize = 8;
     private static final Scanner scanner = new Scanner(System.in);

@@ -10,12 +10,9 @@ public class Zadanie02 {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        makeAllEqualUsingPairs(inputNumber());
-    }
+        int[][] array = new int[inputNumber()][];
 
-    public static void makeAllEqualUsingPairs(int numberOfCases) {
-        int[][] array = new int[numberOfCases][];
-        for (int i = 0; i < numberOfCases; i++) {
+        for (int i = 0; i < array.length; i++) {
             int stringArraySize;
             String[] stringArray;
 

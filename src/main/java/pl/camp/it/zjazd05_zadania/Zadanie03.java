@@ -20,13 +20,9 @@ public class Zadanie03 {
     }
 
     public static void rearrangingDigitsToGetAMultipleOf5(int numberToCheck) {
-        List<Integer> listOfDigits = new ArrayList<>();
-        listOfDigits.add(numberToCheck % 10);
-        while (numberToCheck / 10 != 0) {
-            numberToCheck = numberToCheck / 10;
-            listOfDigits.add(0, numberToCheck % 10);
-        }
-        if (listOfDigits.contains(0) || listOfDigits.contains(5)) {
+        String stringNumberToCheck = String.valueOf(numberToCheck);
+
+        if (stringNumberToCheck.contains("0") || stringNumberToCheck.contains("5")) {
             System.out.println("Yes");
         } else {
             System.out.println("No");
