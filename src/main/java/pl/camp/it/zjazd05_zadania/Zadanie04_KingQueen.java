@@ -29,7 +29,7 @@ public class Zadanie04_KingQueen {
         for (int i = 0; i < arrayOfCases.length; i++) {
             String input = input();
             if (isValidInput(input)) {
-                arrayOfCases[i] = isKingEaten(input);
+                arrayOfCases[i] = isKingEatenWhile(input);
             } else {
                 System.out.println("Wrong input");
                 i--;
@@ -57,7 +57,7 @@ public class Zadanie04_KingQueen {
         return false;
     }
 
-    public static boolean isKingEaten(String figuresPlacement) {
+    public static boolean isKingEatenFor(String figuresPlacement) {
         int kingRow = getFigureRow(figuresPlacement.substring(0, 2));
         int kingColumn = getFigureColumn(figuresPlacement.substring(0, 2));
 
@@ -98,8 +98,8 @@ public class Zadanie04_KingQueen {
                         rowToCheck = rowToCheck + columnToCheck;
                         columnToCheck = 0;
                     } else if (columnToCheck >= boardSize) {
-                        columnToCheck = boardSize - rowToCheck;
-                        rowToCheck = 0;
+                        columnToCheck = rowToCheck + 1;
+                        rowToCheck = boardSize - 1;
                     }
 
                     if (rowToCheck == queenRow && columnToCheck == queenColumn) {
@@ -112,6 +112,60 @@ public class Zadanie04_KingQueen {
                 }
             }
         }
+        return false;
+    }
+
+    public static boolean isKingEatenWhile(String figuresPlacement) {
+        int kingRow = getFigureRow(figuresPlacement.substring(0, 2));
+        int kingColumn = getFigureColumn(figuresPlacement.substring(0, 2));
+
+        int queenRow = getFigureRow(figuresPlacement.substring(3));
+        int queenColumn = getFigureColumn(figuresPlacement.substring(3));
+
+        //horizontally && vertically
+        if ((kingRow == queenRow) || (kingColumn == queenColumn)) {
+            return true;
+        }
+
+        int rowToCheck = kingRow;
+        int columnToCheck = kingColumn;
+
+        //diagonally right-down
+        do {
+            rowToCheck++;
+            columnToCheck++;
+
+            if (rowToCheck >= boardSize) {
+                rowToCheck = boardSize - columnToCheck;
+                columnToCheck = 0;
+            } else if (columnToCheck >= boardSize) {
+                columnToCheck = boardSize - rowToCheck;
+                rowToCheck = 0;
+            }
+
+            if ((rowToCheck == queenRow) && (columnToCheck == queenColumn)) {
+                return true;
+            }
+        } while (!((rowToCheck == kingRow) && (columnToCheck == kingColumn)));
+
+        //diagonally right-up
+        do {
+            rowToCheck--;
+            columnToCheck++;
+
+            if (rowToCheck < 0) {
+                rowToCheck = rowToCheck + columnToCheck;
+                columnToCheck = 0;
+            } else if (columnToCheck >= boardSize) {
+                columnToCheck = rowToCheck + 1;
+                rowToCheck = boardSize - 1;
+            }
+
+            if (rowToCheck == queenRow && columnToCheck == queenColumn) {
+                return true;
+            }
+        } while (!((rowToCheck == kingRow) && (columnToCheck == kingColumn)));
+
         return false;
     }
 
