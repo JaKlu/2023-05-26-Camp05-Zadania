@@ -1,5 +1,6 @@
 package pl.camp.it.zjazd05_zadania;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,18 +12,11 @@ public class Zadanie04_KingQueen {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String[][] board = new String[][]{
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-                {"-", "-", "-", "-", "-", "-", "-", "-",},
-        };
+        String[][] board = new String[boardSize][boardSize];
+        for (int i = 0; i < boardSize; i++) {
+            Arrays.fill(board[i], "-");
+        }
         printBoard(board);
-
 
         boolean[] arrayOfCases = new boolean[inputNumber()];
 
